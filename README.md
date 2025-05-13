@@ -23,6 +23,7 @@ recommend at least skimming that page before continuing.
   * `cd /etc`
   * `sudo cp -r exim4 exim4.dpkg.orig`  # save a copy of standard config
   * `sudo patch -p0 < ~/path/to/modified/smarthost.patch`
+  * `sudo chgrp Debian-exim exim4/passwd.client`
 3. Then, on your DNS server, edit /etc/bind/local/db.example.net (of course
   with your own domainname here) and add SPF and DKIM records for your
   devbox:

@@ -1,0 +1,66 @@
+diff -uNr exim4/exim4.conf.localmacros exim4.modified/exim4.conf.localmacros
+--- exim4/exim4.conf.localmacros	1969-12-31 16:00:00.000000000 -0800
++++ exim4.modified/exim4.conf.localmacros	2025-05-12 18:08:57.115496342 -0700
+@@ -0,0 +1,6 @@
++CFILEMODE='644'
++#REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS=*
++#TLS_ON_CONNECT_PORTS=465
++MAIN_TLS_ENABLE=1
++#REQUIRE_PROTOCOL=smtps
++REMOTE_SMTP_SMARTHOST_TLS_VERIFY_HOSTS = !*
+diff -uNr exim4/exim4.conf.template exim4.modified/exim4.conf.template
+--- exim4/exim4.conf.template	2024-09-28 07:49:26.000000000 -0700
++++ exim4.modified/exim4.conf.template	2025-05-12 18:08:57.115496342 -0700
+@@ -340,6 +340,9 @@
+ .ifndef MAIN_TLS_ADVERTISE_HOSTS
+ MAIN_TLS_ADVERTISE_HOSTS = *
+ .endif
++.ifdef TLS_ON_CONNECT_PORTS
++  tls_on_connect_ports = TLS_ON_CONNECT_PORTS
++.endif
+ tls_advertise_hosts = MAIN_TLS_ADVERTISE_HOSTS
+ 
+ 
+@@ -1727,6 +1730,9 @@
+ .ifdef REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS
+   hosts_require_tls = REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS
+ .endif
++.ifdef REQUIRE_PROTOCOL
++  protocol = REQUIRE_PROTOCOL
++.endif
+ .ifdef REMOTE_SMTP_SMARTHOST_TLS_VERIFY_CERTIFICATES
+   tls_verify_certificates = REMOTE_SMTP_SMARTHOST_TLS_VERIFY_CERTIFICATES
+ .endif
+diff -uNr exim4/passwd.client exim4.modified/passwd.client
+--- exim4/passwd.client	2024-09-28 07:49:26.000000000 -0700
++++ exim4.modified/passwd.client	2025-05-12 18:08:57.115496342 -0700
+@@ -5,3 +5,4 @@
+ #
+ # Example:
+ ### target.mail.server.example:login:password
++klughost.example.net:klugmann:70p53kr37p455w0rd
+diff -uNr exim4/update-exim4.conf.conf exim4.modified/update-exim4.conf.conf
+--- exim4/update-exim4.conf.conf	2025-05-12 18:35:33.288472157 -0700
++++ exim4.modified/update-exim4.conf.conf	2025-05-12 18:08:57.115496342 -0700
+@@ -16,16 +16,15 @@
+ #
+ # This is a Debian specific file
+ 
+-dc_eximconfig_configtype='local'
+-dc_other_hostnames='devbox.example.net'
++dc_eximconfig_configtype='smarthost'
++dc_other_hostnames='devbox.localnet'
+ dc_local_interfaces='127.0.0.1 ; ::1'
+-dc_readhost=''
++dc_readhost='devbox.example.net'
+ dc_relay_domains=''
+ dc_minimaldns='false'
+ dc_relay_nets=''
+-dc_smarthost=''
+-CFILEMODE='644'
++dc_smarthost='klughost.example.net::465'
+ dc_use_split_config='false'
+-dc_hide_mailname=''
++dc_hide_mailname='true'
+ dc_mailname_in_oh='true'
+ dc_localdelivery='mail_spool'

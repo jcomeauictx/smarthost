@@ -42,14 +42,13 @@ diff -uNr exim4/passwd.client exim4.modified/passwd.client
 diff -uNr exim4/update-exim4.conf.conf exim4.modified/update-exim4.conf.conf
 --- exim4/update-exim4.conf.conf	2025-05-12 18:35:33.288472157 -0700
 +++ exim4.modified/update-exim4.conf.conf	2025-05-12 18:08:57.115496342 -0700
-@@ -16,16 +16,15 @@
+@@ -16,16 +16,16 @@
  #
  # This is a Debian specific file
  
 -dc_eximconfig_configtype='local'
--dc_other_hostnames='devbox.example.net'
 +dc_eximconfig_configtype='smarthost'
-+dc_other_hostnames='devbox.localnet'
+ dc_other_hostnames='devbox.example.net'
  dc_local_interfaces='127.0.0.1 ; ::1'
 -dc_readhost=''
 +dc_readhost='devbox.example.net'
@@ -57,8 +56,8 @@ diff -uNr exim4/update-exim4.conf.conf exim4.modified/update-exim4.conf.conf
  dc_minimaldns='false'
  dc_relay_nets=''
 -dc_smarthost=''
--CFILEMODE='644'
 +dc_smarthost='klughost.example.net::465'
+ CFILEMODE='644'
  dc_use_split_config='false'
 -dc_hide_mailname=''
 +dc_hide_mailname='true'

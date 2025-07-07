@@ -3,10 +3,10 @@ diff -uNr exim4/exim4.conf.localmacros exim4.modified/exim4.conf.localmacros
 +++ exim4.modified/exim4.conf.localmacros	2025-05-12 18:08:57.115496342 -0700
 @@ -0,0 +1,6 @@
 +CFILEMODE='644'
-+#REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS=*
-+#TLS_ON_CONNECT_PORTS=465
++REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS=*
++TLS_ON_CONNECT_PORTS=465
 +MAIN_TLS_ENABLE=1
-+#REQUIRE_PROTOCOL=smtps
++REQUIRE_PROTOCOL=smtps
 +REMOTE_SMTP_SMARTHOST_TLS_VERIFY_HOSTS = !*
 diff -uNr exim4/exim4.conf.template exim4.modified/exim4.conf.template
 --- exim4/exim4.conf.template	2024-09-28 07:49:26.000000000 -0700
